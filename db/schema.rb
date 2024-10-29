@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_27_105938) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_29_183226) do
   create_table "albums", force: :cascade do |t|
     t.string "cover"
     t.string "title"
     t.string "artist"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "album_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_favourites_on_album_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -28,4 +37,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_27_105938) do
     t.index ["album_id"], name: "index_tracks_on_album_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "favourites", "albums"
+  add_foreign_key "favourites", "users"
 end
