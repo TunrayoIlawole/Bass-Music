@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "albums#index"
   
-  resources :albums
+  resources :albums, only: [:index, :show] do
+    resource :favourite, only: [:create, :destroy]
+  end
+
+  get 'favourites', to: 'favourites#index', as: 'favourites'
 end
