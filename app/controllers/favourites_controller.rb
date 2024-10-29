@@ -3,7 +3,7 @@ class FavouritesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favourite_albums = current.favourite_albums
+    @favourite_albums = current_user.favourite_albums
   end
 
   def create

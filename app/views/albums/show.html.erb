@@ -9,7 +9,7 @@
     <% if current_user.favourite_albums.include?(@album) %>
       <%= button_to 'Unfavourite', album_favourite_path(@album), method: :delete %>
     <% else %>
-      <%= button_to 'Favourite', album_favourites_path(@album), method: :post %>
+      <%= button_to 'Favourite', album_favourite_path(@album), method: :post %>
     <% end %>
 
     <% @tracks.each do |track| %>
