@@ -1,0 +1,13 @@
+<h1>Your Favourite Albums</h1>
+
+<% if @favourite_albums.any? %>
+  <ul>
+    <% @favourite_albums.each do |album| %>
+      <li>
+        <%= link_to album.title, album_path(album) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You haven't added any favourite albums yet.</p>
+<% end %>
